@@ -18,6 +18,7 @@ const reducer = function(state = initialState, action) {
           ...state.tasks,
           action.task,
         ],
+        alertMessage: "",
       };
 
     case ACTION_TYPES.SET_ALERT_MESSAGE:
