@@ -9,7 +9,10 @@ const TaskList = ({ tasks, alertMessage }) => {
       <i>{alertMessage}</i>
       <ol>
         {tasks.map((task, idx) => (
-          <li key={idx}>{task}</li>
+        <li key={idx}>{task}
+          <button> Delete </button>
+          <button> Complete </button>
+        </li>
         ))}
       </ol>
     </div>
