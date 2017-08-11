@@ -1,13 +1,9 @@
 import * as ACTION_TYPES from '../constants';
 
-const initialState = {
-  tasks: [
-    'Learn Redux!',
-    'Learn React',
-    'Learn ExpressJS',
-  ],
-  alertMessage: '',
-}
+const initialState  = {
+  tasks: [],
+  alertMessage: "",
+};
 
 const reducer = function(state = initialState, action) {
   switch(action.type) {

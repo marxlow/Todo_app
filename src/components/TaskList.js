@@ -8,11 +8,11 @@ const TaskList = ({ tasks, alertMessage }) => {
       <h2>List of Todos</h2>
       <i>{alertMessage}</i>
       <ol>
-        {tasks.map((task, idx) => (
-        <li key={idx}>{task}
-          <button> Delete </button>
-          <button> Complete </button>
-        </li>
+        {tasks.map((task) => (
+          <li key={task.taskIndex}>{task.taskName}
+            <button> Delete </button>
+            <button> Complete </button>
+          </li>
         ))}
       </ol>
     </div>

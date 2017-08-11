@@ -4,17 +4,22 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
+let nextTaskIndex = 0;
+
 class TaskInputBar extends Component {
   constructor() {
     super();
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
   handleSubmit(e) {
     e.preventDefault();
-    let newTask = this.input.value;
+    let newTask = { taskName: this.input.value, taskIndex: nextTaskIndex };
     this.props.handleSubmit(newTask);
     this.input.value = '';
+    nextTaskIndex += 1;
   }
+
   render() {
     return (
       <form onSubmit={this.handleSubmit}>

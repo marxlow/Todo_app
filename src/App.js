@@ -14,12 +14,7 @@ import logo from './logo.svg';
 import reducer from './reducers';
 
 const store = initStore();
-
-// onTitleChange(event) {
-//   const task = this.state.task;
-//   task.title = event.target.value;
-//   this.setState({task : task });
-// }
+let nextTaskIndex = 0;
 
 class App extends Component {
   render() {
