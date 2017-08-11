@@ -14,7 +14,7 @@ class TaskInputBar extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    let newTask = { taskName: this.input.value, taskIndex: nextTaskIndex };
+    let newTask = { taskName: this.input.value, taskIndex: nextTaskIndex, taskCompleted: false };
     this.props.handleSubmit(newTask);
     this.input.value = '';
     nextTaskIndex += 1;
