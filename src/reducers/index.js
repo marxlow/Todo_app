@@ -3,6 +3,7 @@ import * as ACTION_TYPES from '../constants';
 const initialState  = {
   tasks: [],
   alertMessage: "",
+  filter: 'NO_FILTER',
 };
 
 const reducer = function(state = initialState, action) {
@@ -21,7 +22,7 @@ const reducer = function(state = initialState, action) {
         ...state,
         tasks: [
           ...state.tasks.slice(0, action.taskIndex),
-          ...state.tasks.slice(action.taskIndex+1)
+          ...state.tasks.slice(action.taskIndex + 1)
         ],
         alertMessage: "Deleted Task!",
       };
@@ -35,7 +36,12 @@ const reducer = function(state = initialState, action) {
         ...state,
         tasks: state.tasks.map(task =>
         (task.taskIndex === action.taskIndex)
-        ? {...task, taskCompleted: !task.completed} : task),
+        ? { ...task, taskCompleted: !task.taskCompleted } : task),
+      };
+    case ACTION_TYPES.CHANGE_FILTER:
+      return {
+        ...state,
+        filter: action.filter,
       };
     default:
       return state;

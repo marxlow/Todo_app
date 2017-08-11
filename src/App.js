@@ -6,6 +6,7 @@ import * as ACTION_TYPES from './constants';
 import { Provider, connect } from 'react-redux'
 import React, { Component } from 'react';
 
+import TaskFilter from './components/TaskFilter';
 import TaskInputBar from './components/TaskInputBar';
 import TaskList from './components/TaskList';
 import { createStore } from 'redux'
@@ -24,6 +25,7 @@ class App extends Component {
         <h1>This is your Todo App!</h1>
         <div>
           <section>
+            <TaskFilter />
             <TaskList />
             <TaskInputBar />
           </section>

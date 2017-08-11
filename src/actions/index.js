@@ -13,7 +13,6 @@ export const toggleComplete = (taskIndex) => ({
 export const deleteTask = (taskIndex) => ({
   type: ACTION_TYPES.DELETE_TASK,
   taskIndex,
-  alertMessage: "DEFINITELY IN DELETe!",
 });
 
 export const createNewTask = (task) => {
@@ -29,3 +28,8 @@ export const createNewTask = (task) => {
     }
   }
 };
+
+export const changeFilter = (filter) => ({
+  type: ACTION_TYPES.CHANGE_FILTER,
+  filter,
+});

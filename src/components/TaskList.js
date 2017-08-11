@@ -1,7 +1,22 @@
+import * as ACTIONS from '../actions';
+
 import React, { Component } from 'react';
 
+import Task from './Task';
 import { connect } from 'react-redux';
-import * as ACTIONS from '../actions';
+
+const Tasks = ({ tasks, handleDelete, handleToggleComplete }) => (
+  <ol>
+    {tasks.map((task, index) => (
+      <Task
+        key={index}
+        task={task}
+        handleDelete={handleDelete}
+        handleToggleComplete={handleToggleComplete}
+      />
+    ))}
+  </ol>
+);
 
 class TaskList extends Component {
   constructor() {
@@ -10,52 +25,41 @@ class TaskList extends Component {
     this.handleDelete = this.handleDelete.bind(this);
   }
 
-  handleToggleComplete(e) {
-    this.props.handleToggleComplete(0);
+  handleToggleComplete(index) {
+    this.props.handleToggleComplete(index);
   }
 
-  handleDelete(e) {
-    this.props.handleDelete(0);
+  handleDelete(index) {
+    this.props.handleDelete(index);
   }
 
   render() {
+    let { tasks, filter } = this.props;
+    if (filter === 'NO_FILTER') {
+      tasks = tasks.filter(({ taskDeleted }) => !taskDeleted);
+    } else if (filter === 'COMPLETED') {
+      tasks = tasks.filter(({ taskCompleted }) => !!taskCompleted);
+    } else if (filter === 'ARCHIVED') {
+      tasks = tasks.filter(({ taskDeleted }) => !!taskDeleted);
+    }
     return (
       <div>
         <h2>List of Todos</h2>
         <i>{this.props.alertMessage}</i>
-        <ol>
-          {this.props.tasks.map((task) => (
-            <li key={task.taskIndex} style={{ textDecoration: task.taskCompleted ? 'line-through' : 'none' }}>{task.taskName}
-              <button onClick={this.handleDelete}> Delete </button>
-              <button onClick={this.handleToggleComplete}> Complete </button>
-            </li>
-          ))}
-        </ol>
+        <Tasks
+          tasks={tasks}
+          handleDelete={this.handleDelete}
+          handleToggleComplete={this.handleToggleComplete}
+        />
       </div>
     );
   }
 }
 
-// const TaskList = ({ tasks, alertMessage, handleDelete, handleToggleComplete}) => {
-//   return (
-//     <div>
-//       <h2>List of Todos</h2>
-//       <i>{alertMessage}</i>
-//       <ol>
-//         {tasks.map((task) => (
-//           <li key={task.taskIndex} style={{ textDecoration: task.taskCompleted ? 'line-through' : 'none' }}>{task.taskName}
-//             {/* <button onClick={handleDelete(task.taskIndex)}> Delete </button> */}
-//             <button onClick={this.handleToggleComplete(task.taskIndex)}> Complete </button>
-//           </li>
-//         ))}
-//       </ol>
-//     </div>
-//   );
-// };
-
 export default connect(
   (state, ownProps) => ({
     tasks: state.tasks,
+    filter: state.filter,
     alertMessage: state.alertMessage,
   }),
   {
